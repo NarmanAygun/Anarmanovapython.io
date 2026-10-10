@@ -1,0 +1,301 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Data Analitikaya Giriş</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&family=Noto+Sans+Mono:wght@500&display=swap">
+<style>
+/* Layout: dərs səhifəsi — nömrələnmiş bölmələr, hər birində bir interaktiv element */
+:root{
+  --bg:#f5f6f8; --surface:#ffffff; --ink:#18202b; --muted:#5a6575; --line:#dde2ea;
+  --accent:#b8650f; --accent-soft:#fbeedd; --blue:#2a5a8a; --blue-soft:#e3edf7;
+  --good:#2e7d4f; --good-soft:#e2f2e8; --bad:#b33a3a; --bad-soft:#f8e3e3;
+  --display:"Noto Serif", Georgia, serif;
+  --body:"Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"Noto Sans Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12161c; --surface:#1b212a; --ink:#e6eaf0; --muted:#9aa5b4; --line:#2c3440;
+  --accent:#e8963f; --accent-soft:#3a2a17; --blue:#7fb0e0; --blue-soft:#1d2c3d;
+  --good:#6fcf97; --good-soft:#18301f; --bad:#ef8a8a; --bad-soft:#3a1d1d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12161c; --surface:#1b212a; --ink:#e6eaf0; --muted:#9aa5b4; --line:#2c3440;
+  --accent:#e8963f; --accent-soft:#3a2a17; --blue:#7fb0e0; --blue-soft:#1d2c3d;
+  --good:#6fcf97; --good-soft:#18301f; --bad:#ef8a8a; --bad-soft:#3a1d1d; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 var(--body);padding:0 16px}
+.wrap{max-width:860px;margin:0 auto;padding-block:40px 64px;display:grid;gap:56px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.25;margin:0}
+h1{font-size:clamp(2rem,5vw,2.8rem)}
+h2{font-size:1.6rem}
+h3{font-size:1.15rem}
+p{margin:0;max-width:65ch}
+.eyebrow{font:500 .78rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+section{display:grid;gap:18px}
+.lead{font-size:1.1rem;color:var(--muted)}
+.note{background:var(--blue-soft);border-radius:10px;padding:14px 16px;font-size:.95rem}
+.note b{color:var(--blue)}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* hero */
+header{display:grid;gap:14px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.toc a{font-size:.88rem;color:var(--blue);text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:4px 12px;background:var(--surface)}
+.toc a:hover{border-color:var(--blue)}
+
+/* pipeline */
+.pipe{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pipe button{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-weight:600;font-size:.95rem}
+.pipe button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.pipe .arr{color:var(--muted)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:grid;gap:8px}
+.panel .ex{font-size:.92rem;color:var(--muted)}
+
+/* stories */
+.stories{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+details summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px}
+details summary::after{content:"+";color:var(--accent);font-weight:700}
+details[open] summary::after{content:"−"}
+details p{margin-top:10px;font-size:.95rem}
+.tag{font:500 .75rem var(--mono);color:var(--muted)}
+
+/* toggle compare */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:99px;padding:3px;background:var(--surface);flex-wrap:wrap}
+.seg button{border:0;background:none;padding:8px 16px;border-radius:99px;font-weight:600;font-size:.92rem}
+.seg button[aria-pressed="true"]{background:var(--blue);color:var(--surface)}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.cmp div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-width:0}
+.cmp dt{font:500 .74rem var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.cmp dd{margin:4px 0 0;font-weight:500}
+.cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.case{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:4px;align-content:start}
+.case strong{font-size:1rem}
+.case span{font-size:.92rem;color:var(--muted)}
+
+/* types */
+.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.type{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:4px}
+.type .q{font-family:var(--display);font-size:1.05rem}
+.type .n{font:500 .74rem var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.type[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--accent-soft)}
+.detail{display:grid;gap:12px}
+.detail ul{margin:0;padding-left:20px}
+.scale{display:grid;gap:6px}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .4s}
+.scale-l{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+
+/* quiz */
+.quiz{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:14px}
+.qtop{display:flex;justify-content:space-between;font:500 .8rem var(--mono);color:var(--muted)}
+.opts{display:grid;gap:8px}
+.opts button{text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 14px}
+.opts button:hover:not(:disabled){border-color:var(--blue)}
+.opts button.ok{background:var(--good-soft);border-color:var(--good)}
+.opts button.no{background:var(--bad-soft);border-color:var(--bad)}
+.opts button:disabled{cursor:default}
+.fb{font-size:.95rem}
+.fb b.ok{color:var(--good)} .fb b.no{color:var(--bad)}
+.next{justify-self:start;background:var(--accent);color:#fff;border:0;border-radius:8px;padding:10px 18px;font-weight:600}
+
+/* glossary */
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.gloss div{border-top:2px solid var(--line);padding-top:8px;min-width:0}
+.gloss b{display:block}
+.gloss span{font-size:.92rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">Modul 1 · Real vaxtda analitika</span>
+  <h1>Data analitikaya giriş</h1>
+  <p class="lead">Bugünkü rəqəmsal dünya hər saniyə nəhəng həcmdə data (məlumat) yaradır. <b>Data analitika</b> bu datanı götürüb suallara cavab tapmaq, meylləri (trendləri) görmək və təşkilatların daha yaxşı qərar verməsinə kömək edən nəticələr çıxarmaq prosesidir.</p>
+  <nav class="toc" aria-label="Bölmələr">
+    <a href="#neft">1.1.1 Datanın dəyəri</a>
+    <a href="#inqilab">1.1.2 Analitika inqilabı</a>
+    <a href="#novler">1.1.3–1.1.4 Dörd növ</a>
+    <a href="#test">Özünü yoxla</a>
+  </nav>
+</header>
+
+<!-- 1.1.1 -->
+<section id="neft">
+  <span class="eyebrow">1.1.1 · Data analitikanın dəyəri</span>
+  <h2>Data — yeni neftdir</h2>
+  <p>Xam neft dəyərlidir, amma o halda istifadə olunmur: onu benzinə, plastikə, kimyəvi maddələrə çevirmək lazımdır. Data da belədir. Xam data özü-özlüyündə az şey deyir; onu <b>toplamaq, şərh etmək və təhlil etmək</b> lazımdır ki, faydalı nümunələr üzə çıxsın. Bu çevrilmə data mütəxəssislərinin, xüsusən <b>data analitiklərin</b> işidir.</p>
+  <p class="tag">Addımlara klikləyin:</p>
+  <div class="pipe" id="pipe"></div>
+  <div class="panel" id="pipePanel" aria-live="polite"></div>
+
+  <h3 style="margin-top:10px">Real həyatdan nümunələr</h3>
+  <div class="stories">
+    <details>
+      <summary>Oakland A's, 2002 <span class="tag">idman</span></summary>
+      <p>Beysbol komandasının baş meneceri keçmiş mövsümlərin datasını təhlil edib oyunçu və heyət seçdi. O, başqalarının "zəif" saydığı, qiyməti aşağı oyunçularla komandanı çempionluq uğrunda mübarizəyə çıxardı. Bu, data təhlilinin praktik dəyərini göstərən məşhur nümunədir.</p>
+    </details>
+    <details>
+      <summary>Koronavirus pandemiyası <span class="tag">səhiyyə</span></summary>
+      <p>Virusun variantlarının yayılmasını izləmək data təhlili ilə mümkün oldu. Hansı bölgədə hansı variantın artdığını görmək qərar verənlərə tez reaksiya verməyə kömək etdi.</p>
+    </details>
+    <details>
+      <summary>Əşyaların İnterneti (IoT) <span class="tag">texnologiya</span></summary>
+      <p>IoT data toplayan və ötürən fiziki əşyalardır: smartfon, fitnes qolbağı, hətta təyyarə mühərriki. Bir reaktiv mühərrik <b>bir uçuşda təxminən 1 terabayt</b> data yaradır. Sosial şəbəkələr və IoT bugünkü "data sunamisi"nin əsas səbəbidir.</p>
+    </details>
+  </div>
+  <div class="note"><b>Nə üçün vacibdir?</b> Ümumdünya İqtisadi Forumu data elmini həyatımızın hər sahəsinə təsir edən qlobal məsələ adlandırıb. Data analitiklər səhiyyədə, dövlət qurumlarında, humanitar təşkilatlarda işləyir və sonradan süni intellekt, maşın öyrənməsi, avtomatlaşdırma kimi sahələrə keçə bilirlər.</div>
+</section>
+
+<!-- 1.1.2 -->
+<section id="inqilab">
+  <span class="eyebrow">1.1.2 · Data analitika inqilabı</span>
+  <h2>Keçmişə baxmaqdan indiyə reaksiya verməyə</h2>
+  <p>Əvvəllər analitika əsasən <b>keçmiş dataya</b> baxırdı. İndi isə təşkilatlar datanı <b>real vaxtda</b>, yəni elə yarandığı anda təhlil edə bilirlər. İki yanaşmanı müqayisə edin:</p>
+  <div class="seg" role="group" aria-label="Analitika yanaşması">
+    <button id="segOld" aria-pressed="true">Ənənəvi (təsviri)</button>
+    <button id="segNew" aria-pressed="false">Yeni nəsil (real vaxt)</button>
+  </div>
+  <dl class="cmp" id="cmp"></dl>
+  <p class="tag" id="cmpNote"></p>
+
+  <h3 style="margin-top:6px">Real vaxt analitikasından istifadə nümunələri</h3>
+  <div class="cases">
+    <div class="case"><strong>Bank</strong><span>Hər əməliyyatı dərhal yoxlayır ki, fırıldaqçılıq şübhəsi olan ödənişi anında tutsun.</span></div>
+    <div class="case"><strong>İstehsalçı</strong><span>Qüsur hesabatlarını daim izləyir və istehsal prosesini mümkün qədər tez düzəldir.</span></div>
+    <div class="case"><strong>Pərakəndə satıcı</strong><span>Müştəri rəylərinə dərhal cavab verir, məhsulu və ya satış strategiyasını dəyişir.</span></div>
+  </div>
+  <div class="note"><b>Əsas fikir:</b> İndi təşkilatlar yalnız rəhbərliyin intuisiyasına və keçmiş nəticələrə güvənmir. Real vaxt datası sürətli, köklü dəyişikliklər etməyə imkan verir. Ənənəvi təsviri analitika isə yenə də vacibdir, sadəcə tək başına kifayət etmir.</div>
+</section>
+
+<!-- 1.1.3–1.1.4 -->
+<section id="novler">
+  <span class="eyebrow">1.1.3–1.1.4 · Cavabları tapmaq</span>
+  <h2>Data analitikanın dörd əsas növü</h2>
+  <p>Data analitika təşkilatlara belə suallara cavab tapmağa kömək edir: müştərilərimiz kimdir? Bazarda və rəqiblərdə vəziyyət necədir? Keçmişdə nə olub, indi nə baş verir, gələcəkdə nə gözləyir? Bu suallar üçün dörd növ analitika var. Hər biri fərqli suala cavab verir. Kartlara klikləyin:</p>
+  <div class="types" id="types"></div>
+  <div class="panel detail" id="typeDetail" aria-live="polite"></div>
+  <div class="note"><b>Yadda saxlayın:</b> Hansı növün seçilməsi həll ediləcək problemdən və verilən sualdan asılıdır. Bəzi növlər yalnız <b>reaktiv</b> (baş verəndən sonra) qərarlar üçün məlumat verir, digərləri maşın öyrənməsi ilə birləşərək <b>proaktiv</b> (qabaqcadan) qərarlara imkan yaradır. Növlər birlikdə istifadə ediləndə ən tam mənzərəni verir.</div>
+</section>
+
+<!-- glossary -->
+<section>
+  <span class="eyebrow">Lüğət</span>
+  <h2>Əsas terminlər</h2>
+  <div class="gloss">
+    <div><b>Data analitika</b><span>Datadan istifadə edərək suallara cavab tapmaq, trendləri görmək və nəticə çıxarmaq prosesi.</span></div>
+    <div><b>IoT (Əşyaların İnterneti)</b><span>Data toplayan və şəbəkə ilə ötürən fiziki cihazlar.</span></div>
+    <div><b>Statik data</b><span>Təhlil zamanı dəyişməyən data: əməliyyatlar, anbar qalığı, qüsur hesabatları.</span></div>
+    <div><b>Real vaxt datası</b><span>Yarandığı anda toplanan və təhlil edilən data.</span></div>
+    <div><b>Reaktiv qərar</b><span>Hadisə baş verdikdən sonra ona cavab olaraq verilən qərar.</span></div>
+    <div><b>Proaktiv qərar</b><span>Hadisəni qabaqcadan görüb hazırlıq məqsədilə verilən qərar.</span></div>
+  </div>
+</section>
+
+<!-- quiz -->
+<section id="test">
+  <span class="eyebrow">Özünü yoxla</span>
+  <h2>Kiçik test</h2>
+  <div class="quiz" id="quiz"></div>
+</section>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+
+/* pipeline */
+const steps=[
+ {t:"Xam data",d:"Sensorlardan, saytlardan, sosial şəbəkələrdən, satış sistemlərindən gələn işlənməmiş məlumat. Xam neft kimi: dəyərlidir, amma hələ istifadəyə hazır deyil.",e:"Nümunə: mağazanın kassasında gün ərzində vurulan minlərlə çek."},
+ {t:"Toplama",d:"Müxtəlif mənbələrdən datanı bir yerə yığmaq və saxlamaq.",e:"Nümunə: bütün filialların çeklərini bir verilənlər bazasına köçürmək."},
+ {t:"Şərh etmə",d:"Datanı təmizləmək, səhvləri düzəltmək və nəyi ifadə etdiyini anlamaq.",e:"Nümunə: təkrarlanan çekləri silmək, məhsul adlarını eyni formata salmaq."},
+ {t:"Təhlil",d:"Nümunələri, trendləri və əlaqələri axtarmaq.",e:"Nümunə: şənbə axşamları dondurma satışının iki dəfə artdığını görmək."},
+ {t:"Qərar",d:"Təhlildən çıxan nəticəyə əsasən hərəkət etmək. Datanın əsl dəyəri burada üzə çıxır.",e:"Nümunə: şənbə günləri dondurma ehtiyatını artırmaq."}
+];
+let si=0;
+function drawPipe(){
+  $("#pipe").innerHTML=steps.map((s,i)=>(i?'<span class="arr" aria-hidden="true">→</span>':'')+`<button aria-pressed="${i===si}" data-i="${i}">${s.t}</button>`).join("");
+  const s=steps[si];
+  $("#pipePanel").innerHTML=`<span class="eyebrow">Addım ${si+1} / ${steps.length}</span><h3>${s.t}</h3><p>${s.d}</p><p class="ex">${s.e}</p>`;
+}
+$("#pipe").addEventListener("click",e=>{const b=e.target.closest("button");if(b){si=+b.dataset.i;drawPipe();}});
+drawPipe();
+
+/* compare */
+const cmp={
+ old:{rows:[["Hansı data","Keçmiş, statik data"],["Nə vaxt təhlil olunur","Ayda və ya rübdə bir dəfə"],["Dəqiqlik","Çox yüksək, çünki data dəyişmir"],["Məqsəd","Texniki olmayan rəhbərlərə aydın hesabat"],["Nümunə nəticə","Keçən ilin mənfəəti, reklamın uğuru"]],
+  note:"Ənənəvi analitika hələ də vacibdir, amma rəqabətdə qalmaq üçün təkcə keçən ilin datasına baxmaq kifayət deyil."},
+ new:{rows:[["Hansı data","Hər növ data: sənəd, şəkil, sosial şəbəkə, sensor"],["Nə vaxt təhlil olunur","Dərhal, data yarandığı anda"],["Dəqiqlik","Data daim dəyişir, sürət önə çıxır"],["Məqsəd","İndiki vəziyyətə tez reaksiya, gələcəyi proqnozlaşdırmaq"],["Nümunə nəticə","Şübhəli ödənişi anında bloklamaq"]],
+  note:"Data toplama, saxlama və əldə etmə texnologiyalarındakı irəliləyiş bunu mümkün edib, hətta məişət texnikasının içindəki sensorlardan belə."}
+};
+function drawCmp(k){
+  $("#cmp").innerHTML=cmp[k].rows.map(r=>`<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("");
+  $("#cmpNote").textContent=cmp[k].note;
+  $("#segOld").setAttribute("aria-pressed",k==="old");$("#segNew").setAttribute("aria-pressed",k==="new");
+}
+$("#segOld").onclick=()=>drawCmp("old");$("#segNew").onclick=()=>drawCmp("new");
+drawCmp("old");
+
+/* types */
+const types=[
+ {n:"Təsviri",en:"Descriptive",q:"Nə baş verdi?",lvl:20,
+  d:"Keçmiş datanı ümumiləşdirir və olanları aydın göstərir. Ən geniş yayılmış və ən sadə növdür.",
+  ex:["Keçən ay neçə məhsul satıldı?","Hansı filial ən çox gəlir gətirdi?","Saytın aylıq ziyarətçi sayı"],
+  tip:"Hesabatlar, cədvəllər, qrafiklər — təsviri analitikanın tipik nəticəsidir."},
+ {n:"Diaqnostik",en:"Diagnostic",q:"Niyə baş verdi?",lvl:45,
+  d:"Hadisənin səbəbini axtarır. Təsviri analitika 'satış düşdü' deyirsə, diaqnostik analitika 'niyə düşdü' sualına cavab verir.",
+  ex:["Satış qiymət artımından sonra düşdü?","Müştərilər niyə səbəti tərk edir?","Hansı amil qüsurların artmasına səbəb oldu?"],
+  tip:"Data arasında əlaqə və səbəb-nəticə axtarılır."},
+ {n:"Proqnozlaşdırıcı",en:"Predictive",q:"Gələcəkdə nə baş verə bilər?",lvl:70,
+  d:"Keçmiş və indiki datadakı nümunələrə əsasən gələcəyi təxmin edir. Çox vaxt maşın öyrənməsi ilə işləyir.",
+  ex:["Gələn ay nə qədər satış gözlənilir?","Hansı müştəri xidmətdən imtina edə bilər?","Bu əməliyyat fırıldaqçılıq ola bilərmi?"],
+  tip:"Proqnoz ehtimaldır, zəmanət deyil."},
+ {n:"Göstərici (preskriptiv)",en:"Prescriptive",q:"Növbəti addım nə olmalıdır?",lvl:95,
+  d:"Ən irəli növdür: yalnız nə olacağını demir, ən yaxşı hərəkəti də tövsiyə edir.",
+  ex:["Mənfəəti artırmaq üçün qiyməti nə qədər dəyişək?","Çatdırılma üçün ən sərfəli marşrut hansıdır?","Hansı müştəriyə hansı təklifi göndərək?"],
+  tip:"Proaktiv qərarların əsasıdır."}
+];
+let ti=0;
+function drawTypes(){
+  $("#types").innerHTML=types.map((t,i)=>`<button class="type" aria-pressed="${i===ti}" data-i="${i}"><span class="n">${t.n} · ${t.en}</span><span class="q">${t.q}</span></button>`).join("");
+  const t=types[ti];
+  $("#typeDetail").innerHTML=`<span class="eyebrow">${t.n} analitika</span><h3>${t.q}</h3><p>${t.d}</p>
+  <div><b>Hansı suallara cavab verir:</b><ul>${t.ex.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+  <p class="tag">${t.tip}</p>
+  <div class="scale"><span class="tag">Mürəkkəblik və dəyər</span><div class="bar"><i style="width:${t.lvl}%"></i></div><div class="scale-l"><span>Reaktiv</span><span>Proaktiv</span></div></div>`;
+}
+$("#types").addEventListener("click",e=>{const b=e.target.closest("button");if(b){ti=+b.dataset.i;drawTypes();}});
+drawTypes();
+
+/* quiz */
+const Q=[
+ {q:"Bank müştərinin ödənişini anında yoxlayıb şübhəli əməliyyatı bloklayır. Bu hansı analitikadır?",o:["Ənənəvi təsviri analitika","Real vaxt analitikası","Rüblük hesabat"],a:1,e:"Data yarandığı anda təhlil olunur və dərhal qərar verilir — bu, real vaxt analitikasıdır."},
+ {q:"\"Keçən rübdə satış niyə 15% azaldı?\" — hansı növə aiddir?",o:["Təsviri","Diaqnostik","Proqnozlaşdırıcı","Göstərici"],a:1,e:"Səbəb ('niyə?') axtarılır — bu, diaqnostik analitikadır."},
+ {q:"\"Gələn qış hansı məhsula tələbat artacaq?\" sualı hansı növə aiddir?",o:["Proqnozlaşdırıcı","Təsviri","Diaqnostik"],a:0,e:"Gələcək haqqında təxmin edilir — proqnozlaşdırıcı analitika."},
+ {q:"Niyə \"data yeni neftdir\" deyilir?",o:["Çünki data neft şirkətlərinə məxsusdur","Çünki xam halda yox, emal olunduqdan sonra dəyər yaradır","Çünki data tükənən resursdur"],a:1,e:"Neft kimi data da toplanmalı, şərh olunmalı və təhlil edilməlidir ki, faydalı olsun."},
+ {q:"Təsviri analitikanın nəticələri niyə çox dəqiq olur?",o:["Çünki süni intellekt istifadə olunur","Çünki təhlil zamanı data adətən dəyişmir","Çünki hər gün təhlil edilir"],a:1,e:"Statik data təhlil zamanı dəyişmədiyi üçün nəticələr yüksək dəqiqlikdə olur."},
+ {q:"\"Mənfəəti artırmaq üçün nə etməliyik?\" sualına hansı növ cavab verir?",o:["Diaqnostik","Təsviri","Göstərici (preskriptiv)"],a:2,e:"Konkret hərəkət tövsiyə olunur — göstərici (preskriptiv) analitika."}
+];
+let qi=0,score=0;
+function drawQ(){
+  if(qi>=Q.length){
+    $("#quiz").innerHTML=`<h3>Nəticə: ${score} / ${Q.length}</h3><p>${score===Q.length?"Əla! Modulu tam başa düşmüsünüz.":score>=4?"Yaxşı nəticə. Səhv etdiyiniz mövzuya bir daha baxın.":"Yuxarıdakı bölmələri yenidən oxuyub testi təkrarlayın."}</p><button class="next" id="again">Yenidən başla</button>`;
+    $("#again").onclick=()=>{qi=0;score=0;drawQ();};return;
+  }
+  const c=Q[qi];
+  $("#quiz").innerHTML=`<div class="qtop"><span>Sual ${qi+1} / ${Q.length}</span><span>Bal: ${score}</span></div><h3>${c.q}</h3>
+  <div class="opts">${c.o.map((o,i)=>`<button data-i="${i}">${o}</button>`).join("")}</div><div class="fb" aria-live="polite"></div>`;
+  $("#quiz .opts").onclick=e=>{
+    const b=e.target.closest("button");if(!b)return;const i=+b.dataset.i;
+    const bs=[...document.querySelectorAll("#quiz .opts button")];
+    bs.forEach((x,j)=>{x.disabled=true;if(j===c.a)x.classList.add("ok");});
+    if(i===c.a)score++;else b.classList.add("no");
+    $("#quiz .fb").innerHTML=`<b class="${i===c.a?"ok":"no"}">${i===c.a?"Düzdür.":"Səhvdir."}</b> ${c.e}`;
+    const n=document.createElement("button");n.className="next";n.textContent=qi===Q.length-1?"Nəticəni gör":"Növbəti sual";
+    n.onclick=()=>{qi++;drawQ();};$("#quiz").appendChild(n);n.focus();
+  };
+}
+drawQ();
+</script>
+
+</body></html>
